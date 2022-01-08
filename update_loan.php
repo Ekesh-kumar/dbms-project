@@ -66,6 +66,7 @@
 
 
 </div>
+<table class="table">
 
   </body>
 
@@ -74,27 +75,31 @@
 </html>
 <?php
 
+require_once "config.php";
+function function_alert($msg){
+    echo "<script>alert('$msg')</script>";
+    
+  }
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(empty(trim($_POST['ac_no'])) && (empty($_POST['add'])||empty($_POST['buy'])))
+    if(empty(trim($_POST['ac_no'])))
       {
-        $err = "Please enter username + password";
-        function_alert("please enter debit or credit inputs");
+        $err = "Please enter loan Account number";
+        function_alert("Please enter loan Account number");
       }
     else{
 
-      $buy=0;
-      $add=0;
-        
-        $id = trim($_POST['ac_no'];
+           
+        $id = trim($_POST['ac_no']);
     }
 
 
 if(empty($err))
 {
-    $sql = "SELECT m_id,abalance,interest,date_start,c_date,ac_no FROM savings WHERE ac_no=?";
+    $sql = "SELECT   ln_id,next_date,m_name,paid,to_be_paid,sts,ln_amount,emi FROM loans ,members WHERE ln_id=? AND loans.m_id=members.m_id";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $ac);
+    mysqli_stmt_bind_param($stmt, "i", $ac);
     $ac= $id;
    
     
@@ -104,75 +109,64 @@ if(empty($err))
         mysqli_stmt_store_result($stmt);
         if(mysqli_stmt_num_rows($stmt) == 1)
                 {
-                    mysqli_stmt_bind_result($stmt, $m_id,$balance,$interest,$data_start,$c_date,$ac_no);
+                    mysqli_stmt_bind_result($stmt, $l_id,$next,$mname,$paid,$bal,$status,$lnamount,$emi);
                     if(mysqli_stmt_fetch($stmt))
                     {
-                      $date1=date('Y-m-d');
-                      $date2=$c_date;
-              
-                      $sql="call finddiff('$date1','$date2',@diff);";
-                    
+                      $paid=$paid+$emi;
 
-                      $result=$conn->query($sql);
-                      $res=$conn->query("SELECT @diff");
-                      $row=mysqli_fetch_assoc($res);
-                      $df=$row['@diff'];
-                      $intrst=$balance*(4/100/365)*$df;
-                      $interest=$intrst+$interest;
-                      $balance=$balance+$intrst;
-                  
-
-
-                
-                      
-
-                      $balance1=0;
-                      if(!empty($credit)){
-                       $balance=$balance+$credit;
+                      echo $bal;
+                      $bal=$bal-$emi;
+                      if($bal<=0){
+                          $status="complete";
                       }
 
-                      if(!empty($debit)){
-                        $balance1=$balance-$debit;
+                      $date1=date($next);
+                      $day=30;
+                      $date=date_create($date1); // or your date string
+                      date_add($date,date_interval_create_from_date_string("$day days"));// add number of days 
+                      $next= date_format($date,"Y-m-d");
+
+
+                      $result1=$conn->query("UPDATE loans SET paid=$paid,last_paid=CURRENT_TIMESTAMP, to_be_paid=$bal, sts='$status',next_date='$next' WHERE ln_id=$id");
+                      if($result1){
+                          $result=$conn->query("SELECT m.m_name, ln.* FROM members m,loans ln where ln_id=$id AND m.m_id=ln.m_id");
+
+                          $row=mysqli_fetch_assoc($result);
                     
-                      }
-
-
-                       if($balance1<0){
-                           function_alert("low balance cannot process debit");
-                       }
-                       else{
-                         $balance+=$balance1;
-                          // this means the password is corrct. Allow user to login
-
-                       $result=$conn->query("UPDATE savings SET abalance=$balance, interest=$interest, c_date=CURRENT_TIMESTAMP WHERE ac_no=$id");
-
-                       $result=$conn->query("SELECT m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid FROM savings s, members m WHERE s.m_id=m.m_id AND ac_no=$id GROUP BY m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid ");
-                       $row=mysqli_fetch_assoc($result);
-                    
-                    
-                     
                      echo "
-                     <table border='4'>
                     <tr>
-                    
+                    <th>Loan ID</th>
                     <th>m_id</th>
-                    <th>Account Number</th>
                     <th>Member name</th>
+                    <th>Starting Date</th>
+                    
+                    <th>Last Loan Paid</th>
+                    <th>Paid</th>
                     <th>Balance</th>
-                    <th>Date Started</th>
-                    <th>Last Transaction</th>
-                    <th>Last Interest Paid</th>
-                    <th>Interest Paid</th>
+
+                    <th>Amount</th>
+                    <th>Amount+interest</th>
+                    <th>Loan End Date</th>
+                    <th>Next Date</th>
+                    <th>Loan Type</th>
+                    <th> EMI</th>
+                    <th>Status</th>
                     </tr>
                     <tr>
+                    <td>$row[ln_id]</td>
                     <td>$row[m_id]</td>
-                    <td>$row[ac_no]</td>
                     <td>$row[m_name]</td>
-                    <td>$row[abalance]</td>
-                    <td>$row[date_start]</td>
-                    <td>$row[c_date]</td>
-                    <td>$row[c_date]</td>
-                    <td>$interest</td>
+                    <td>$row[s_date]</td>
+                    <td>$row[last_paid]</td>
+                    <td>$row[paid]</td>
+                    <td>$row[to_be_paid]</td>
+                    <td>$row[amount]</td>
+                    <td>$row[ln_amount]</td>
+                    <td>$row[loan_end]</td>
+                    <td>$row[next_date]</td>
+                    <td>$row[loan_type]</td>
+                    <td>$row[emi]</td>
+                    <td>$row[sts]</td>
                     </tr>
                     </table>
                     ";

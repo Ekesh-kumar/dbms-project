@@ -26,7 +26,7 @@
 </li>
     
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
+        <a class="nav-link" href="update_pigmy.php">Update pigmy Accounts</a>
       </li>
 
       
@@ -78,21 +78,30 @@
 
 <?php
 require_once "config.php";
+function function_alert($msg){
+  echo "<script>alert('$msg')</script>";
+  
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+  if(empty(trim($_POST["userid"]))&&empty(trim($_POST["acno"]))&&empty(trim($_POST["amount"]))&& empty(trim($_POST["date"]))){
+    function_alert("enter all the fields");
+
+  }
+  else{
  
     $uid=$_POST["userid"];
     $account = $_POST["acno"];
     $amount= $_POST["amount"];
     $date=$_POST["date"];
-    function function_alert($msg){
-        echo "<script>alert('$msg')</script>";
-        
-     }
+  
    
 
  
     // $exists=false;
+
 
      
 
@@ -126,6 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             function_alert("user not registered");
         }
     
+}
 }
     
 ?>

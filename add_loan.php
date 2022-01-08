@@ -139,9 +139,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
              $tobepaid=$lnamount-$emi;
 
           $interest=0;
-            $result1=$conn->query("INSERT INTO loans ( ln_id,m_id,s_date,last_paid,paid,to_be_paid, sts,amount,loan_end,interest_rate,next_date,loan_type,emi) VALUES( $lid,$uid,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$emi,$tobepaid,'$sts',$amount,'$findate',$itrate,'$next','$type',$emi)");
+            $result1=$conn->query("INSERT INTO loans ( ln_id,m_id,s_date,last_paid,paid,to_be_paid, sts,amount,ln_amount,loan_end,interest_rate,next_date,loan_type,emi) VALUES( $lid,$uid,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$emi,$tobepaid,'$sts',$amount,$tobepaid,'$findate',$itrate,'$next','$type',$emi)");
 
-            $result2=$conn->query("UPDATE members SET ln_set=0 WHERE m_id=$uid");
+            $result2=$conn->query("UPDATE members SET ln_set=1 WHERE m_id=$uid");
       
            echo var_dump($result1);
             if ($result1){
