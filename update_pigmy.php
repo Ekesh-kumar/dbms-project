@@ -55,7 +55,7 @@
  
   <div class="form-group">
     <label for="exampleInputPassword1">Enter the Account Number</label>
-    <input type="text" name="ac_no" class="form-control" id="exampleInputPassword1" placeholder="Enter Account Number">
+    <input type="text" name="ac_no" class="form-control" id="exampleInputPassword1" placeholder="Enter pigmy ID">
   </div>
   <br>
 
@@ -64,10 +64,7 @@
     <input type="number" name="add" class="form-control" id="exampleInputPassword1" placeholder="to be credited">
   </div>
 <br>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Amount to be debited</label>
-    <input type="number" name="buy" class="form-control" id="exampleInputPassword1" placeholder="to be debited">
-  </div>
+ 
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -98,10 +95,10 @@ function function_alert($msg){
 
 // if request method is post
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(empty(trim($_POST['ac_no'])) && (empty($_POST['add'])||empty($_POST['buy'])))
+    if(empty(trim($_POST['ac_no'])) && (empty($_POST['add'])))
       {
         $err = "Please enter username + password";
-        function_alert("please enter debit or credit inputs");
+        function_alert("please all the fields");
       }
     else{
 
@@ -109,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
       $add=0;
         
         $id = trim($_POST['ac_no']);
-        $debit=trim($_POST['buy']);
+
         $credit=trim($_POST['add']);
     }
 
@@ -131,42 +128,9 @@ if(empty($err))
                     mysqli_stmt_bind_result($stmt, $m_id,$balance,$interest,$data_start,$c_date,$ac_no);
                     if(mysqli_stmt_fetch($stmt))
                     {
-                      $date1=date('Y-m-d');
-                      $date2=$c_date;
-              
-                      $sql="call finddiff('$date1','$date2',@diff);";
-                    
-
-                      $result=$conn->query($sql);
-                      $res=$conn->query("SELECT @diff");
-                      $row=mysqli_fetch_assoc($res);
-                      $df=$row['@diff'];
-                      $intrst=$balance*(4/100/365)*$df;
-                      $interest=$intrst+$interest;
-                      $balance=$balance+$intrst;
-                  
-
-
-                
                       
-
-                      $balance1=0;
-                      if(!empty($credit)){
-                       $balance=$balance+$credit;
-                      }
-
-                      if(!empty($debit)){
-                        $balance1=$balance-$debit;
-                    
-                      }
-
-
-                       if($balance1<0){
-                           function_alert("low balance cannot process debit");
-                       }
-                       else{
-                         $balance+=$balance1;
-                          // this means the password is corrct. Allow user to login
+                      
+                        // this means the password is corrct. Allow user to login
 
                        $result=$conn->query("UPDATE savings SET abalance=$balance, interest=$interest, c_date=CURRENT_TIMESTAMP WHERE ac_no=$id");
 
