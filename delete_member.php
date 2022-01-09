@@ -6,8 +6,7 @@ function function_alert($msg){
     echo "<script>alert('$msg')</script>";
     
  }
-$login = false;
-$showError = false;
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST["username"];
     $password = $_POST["password"]; 
