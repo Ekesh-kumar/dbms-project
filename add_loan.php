@@ -36,7 +36,7 @@
   
 
     <div class="container my-4">
-     <h1 class="text-center">Register a member</h1>
+     <h1 class="text-center">Create Loan Account:</h1>
      <form action=""  method="post">
         <div class="form-group">
         <div class="form-group">
@@ -46,7 +46,7 @@
             
        
             <label for="username">Enter Loan Account Number</label>
-            <input type="text" maxlength="11" class="form-control" id="lid" name="lid" aria-describedby="emailHelp" placeholder="Pimgy Account Number">
+            <input type="text" maxlength="11" class="form-control" id="lid" name="lid" aria-describedby="emailHelp" placeholder="Loan Account Number">
             <br>
 
             <label for="username">Enter Loan ID</label>

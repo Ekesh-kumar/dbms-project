@@ -70,7 +70,7 @@
 <body>
     <div class="navbar">
     
-        <a href="objgoa1.php">Home</a>
+        <a href="welcome.php">Home</a>
     </div>
     <h1 style="color: brown;text-align: center;background-color:yellowgreen;">AGRICULTURE FACILITY</h1>
     <br>

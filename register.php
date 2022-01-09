@@ -1,6 +1,7 @@
 <?php
 require_once "config.php";
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     $uid=$_POST["userid"];
@@ -32,10 +33,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $numExistRows = mysqli_num_rows($result);
     if($numExistRows > 0){
         // $exists = true;
-        funtion_alert("User already Exists");
+        function_alert("User already Exists");
     }
         elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        funtion_alert("invalid email");
+        function_alert("invalid email");
         }
         elseif(mobile_no($phone)==0){
             function_alert("invalid phone");

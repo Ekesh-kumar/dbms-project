@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // Check whether this username exists
-    $existSql = "SELECT p_set FROM `members` WHERE m_id = $uid";
+    $existSql = "SELECT p_set,m_name FROM `members` WHERE m_id = $uid";
     $result = mysqli_query($conn, $existSql);
     $numExistRows = mysqli_num_rows($result);
     if($numExistRows > 0){
@@ -122,15 +122,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                  
         else{
-            $sql= $conn->query("INSERT INTO pigmy ( p_id, m_id,start,last_deposited,p_balance,interest, amount,last_ppaid) VALUES ('$account',$uid,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$amount ,0,$amount,CURRENT_TIMESTAMP)");
+            $sql= $conn->query("INSERT INTO pigmy ( p_id, m_id,start,last_deposited,p_balance,interest) VALUES ($account,$uid,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$amount ,0)");
             $sql=$conn->query("UPDATE members SET p_set=1 WHERE m_id=$uid");
           
             if ($sql){
                 function_alert("user successfully registered");
-            }
+                $sql="SELECT * FROM pigmy WHERE p_id=$account";
+                $result=$conn->query($sql);
+                $row=mysqli_fetch_assoc($result);
+
+                
+
+                echo " <table border='4''>
+                   <tr>
+                <th>Pigmy ID</th>
+                <th>Member ID</th>
+                <th>Starting Date</th>
+                <th>Last-deposited</th>
+                <th>Pigmy Account Balance</th>
+                <th>Interest Gained</th>
+                
+                 </tr>
+            
+                <tr>
+                <td>$row[p_id]</td>
+                <td>$row[m_id]</td>
+                <td>$row[start]</td>
+                <td>$row[last_deposited]</td>
+                <td>$row[p_balance]</td>
+                <td>$row[interest]</td>
+              
+                </tr>";
+
+      echo "</table>";
+            
         
         }
     }
+  }
         else{
             function_alert("user not registered");
         }

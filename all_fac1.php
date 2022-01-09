@@ -34,11 +34,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="admin.php"><h5>Home</h5></a>
+          <a class="nav-link active" aria-current="page" href="welcome.php"><h5>Home</h5></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="update_stocks.php">Update stock</a>
-        </li>
+       
     
         
       
@@ -82,7 +80,6 @@ echo "</table>";
 ?>
 <table class="table">
   <?php
-
 echo "<h1>Seeds and their stocks</h1>";
 
 

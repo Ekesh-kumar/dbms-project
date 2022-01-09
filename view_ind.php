@@ -130,7 +130,8 @@ if(empty($err))
                     {
                        
                             // this means the password is corrct. Allow user to login
-                           
+                           echo "<h2>Member Account details</h2>";
+                           echo "<br>";
 
                            echo " <table border='4'>
                             <tr>
@@ -187,7 +188,7 @@ if(empty($err))
 
                       if($p_set==1){
 
-                        echo "<h1>Savings Account</h1>";
+                        echo "<h1>Pigmy Account</h1>";
                         
                             $sql="SELECT * FROM pigmy WHERE m_id=$id";
                             $result=$conn->query($sql);
@@ -316,6 +317,9 @@ if(empty($err))
                      
                             
                         }
+                    }
+                    else{
+                    function_alert("member not exist");
                     }
 
                 }

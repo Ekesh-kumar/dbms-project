@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>update_saving</title>
     <style>
       
@@ -107,10 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
       $buy=0;
       $add=0;
-        
+        $credit=0;
+        $debit=0;
         $id = trim($_POST['ac_no']);
         $debit=trim($_POST['buy']);
         $credit=trim($_POST['add']);
+
+      
     }
 
 
@@ -150,22 +153,23 @@ if(empty($err))
                 
                       
 
-                      $balance1=0;
+                      $ob=$balance;
                       if(!empty($credit)){
                        $balance=$balance+$credit;
+                       
                       }
 
                       if(!empty($debit)){
-                        $balance1=$balance-$debit;
+                        $balance=$balance-$debit;
                     
                       }
 
 
-                       if($balance1<0){
+                       if($balance<0){
                            function_alert("low balance cannot process debit");
                        }
                        else{
-                         $balance+=$balance1;
+                        
                           // this means the password is corrct. Allow user to login
 
                        $result=$conn->query("UPDATE savings SET abalance=$balance, interest=$interest, c_date=CURRENT_TIMESTAMP WHERE ac_no=$id");
@@ -173,10 +177,12 @@ if(empty($err))
                        $result=$conn->query("SELECT m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid FROM savings s, members m WHERE s.m_id=m.m_id AND ac_no=$id GROUP BY m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid ");
                        $row=mysqli_fetch_assoc($result);
                     
-                    
+                    ?>
+                    <table class="table">
+                    <?php
                      
-                     echo "
-                     <table border='4'>
+                     echo "<br>
+                     
                     <tr>
                     
                     <th>m_id</th>

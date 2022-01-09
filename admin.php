@@ -17,7 +17,7 @@ session_start();
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Welcome - <?php $_SESSION['username']?></title>
+    <title>admin system</title>
     <style>
         body{
             background-image:url("https://t4.ftcdn.net/jpg/02/86/02/67/360_F_286026740_xWkobcEk5g38qrH7cpfeImAnlUUSIrc5.jpg");
@@ -71,7 +71,7 @@ session_start();
         <li><a href="delete_saving.php">Delete a pigmy Account</a></li>
         <li><a href="delete_pigmy.php">Delete a FD Account</a></li>
         <li><a href="delete_fd.php">Delete a Saving  Account</a></li>
-        <li><a href="create.loan.php">Create Loan account</a></li>
+        <li><a href="add_loan.php">Create Loan account</a></li>
         <li><a href="delete_loan.php">Delete Loan Account</a></li> 
      
     </strong>

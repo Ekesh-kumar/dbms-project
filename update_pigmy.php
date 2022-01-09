@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>update_saving</title>
+    <title>update Pigmy</title>
     <style>
       
       th{
@@ -77,15 +77,17 @@
 
 </div>
 
+
+</body>
+
+</html>
+
    
 
 <?php
-//This script will handle login
 
-// check if the user is already logged in
 
 require_once "config.php";
-
 
 $err = "";
 function function_alert($msg){
@@ -102,8 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
       }
     else{
 
-      $buy=0;
-      $add=0;
         
         $id = trim($_POST['ac_no']);
 
@@ -113,9 +113,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 if(empty($err))
 {
-    $sql = "SELECT m_id,abalance,interest,date_start,c_date,ac_no FROM savings WHERE ac_no=?";
+    $sql = "SELECT m.m_name, s.* FROM members m, pigmy s WHERE m.m_id=s.m_id AND p_id=?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $ac);
+    mysqli_stmt_bind_param($stmt, "i", $ac);
     $ac= $id;
    
     
@@ -125,83 +125,62 @@ if(empty($err))
         mysqli_stmt_store_result($stmt);
         if(mysqli_stmt_num_rows($stmt) == 1)
                 {
-                    mysqli_stmt_bind_result($stmt, $m_id,$balance,$interest,$data_start,$c_date,$ac_no);
+                    mysqli_stmt_bind_result($stmt, $m_name, $p_id, $m_id, $start, $last_deposited,$p_balance, $interest);
                     if(mysqli_stmt_fetch($stmt))
                     {
                       
                       
-                        // this means the password is corrct. Allow user to login
+                        // update pigmy account details 
+                        $p_balance=$p_balance+$credit;
+                        $interest=(4/100/365)*$credit+$interest;
+                        
 
-                       $result=$conn->query("UPDATE savings SET abalance=$balance, interest=$interest, c_date=CURRENT_TIMESTAMP WHERE ac_no=$id");
+                       $result=$conn->query("UPDATE pigmy SET p_balance=$p_balance, interest=$interest, last_deposited=CURRENT_TIMESTAMP WHERE p_id=$id");
 
-                       $result=$conn->query("SELECT m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid FROM savings s, members m WHERE s.m_id=m.m_id AND ac_no=$id GROUP BY m.m_id, ac_no,m_name,abalance,date_start,c_date,last_spaid ");
+                       $result=$conn->query("SELECT * FROM pigmy WHERE p_id=$id ");
                        $row=mysqli_fetch_assoc($result);
                     
                     
                      
-                     echo "
-                     <table border='4'>
+                    
+                     ?>
+
+                     <table class="table">
+                       <?php
+                       echo"
                     <tr>
                     
-                    <th>m_id</th>
-                    <th>Account Number</th>
+                    <th>Member ID</th>
+                    <th>Pigmy Account Number</th>
                     <th>Member name</th>
                     <th>Balance</th>
                     <th>Date Started</th>
                     <th>Last Transaction</th>
-                    <th>Last Interest Paid</th>
+                
                     <th>Interest Paid</th>
                     </tr>
                     <tr>
+                   
                     <td>$row[m_id]</td>
-                    <td>$row[ac_no]</td>
-                    <td>$row[m_name]</td>
-                    <td>$row[abalance]</td>
-                    <td>$row[date_start]</td>
-                    <td>$row[c_date]</td>
-                    <td>$row[c_date]</td>
-                    <td>$interest</td>
+                    <td>$row[p_id]</td>
+                    <td>$m_name</td>
+                    <td>$row[p_balance]</td>
+                    <td>$row[start]</td>
+                    <td>$row[last_deposited]</td>
+                    <td>$row[interest]</td>
                     </tr>
                     </table>
-                    ";
-                
-                    
-
-                      
-
-                       
-
+                    ";                   
                        }             
                     }
+                  
 
-                }
+                
                 else{
-                  function_alert("Invalid facility ID");
+                  function_alert("Invalid Pigmy Accounter Number");
                 }
-
-
-    
-}    
+ 
+      }    
+    }
 }
-}
-
-
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-
-</html>

@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Register A Member</title>
+
+    <style>
+      table{
+        border:3px;
+        border-style:groove;
+        border-color:black;
+      }
+      h1{
+        color:red;
+
+      }
+      td{
+        color:green;
+      }
+      </style>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -88,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
    
 
  
-    // $exists=false;
+    
     function function_alert($msg){
         echo "<script>alert('$msg')</script>";
         
@@ -116,10 +131,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $interest=0;
             $sql=$conn->query("INSERT INTO savings ( m_id, abalance,interest,date_start, c_date,last_spaid,ac_no) VALUES( $uid, $amount, $interest,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'$account')");
 
-            $sql=$conn->query("UPDATE members SET a_set=1 WHERE m_id=$uid");
-            $result = mysqli_query($conn, $sql);
+            $result=$conn->query("UPDATE members SET a_set=1 WHERE m_id=$uid");
+        
+            echo var_dump($result);
             if ($result){
                 function_alert("user successfully registered");
+                echo "<h1>Savings Account</h1>";
+                        
+                $sql="SELECT * FROM savings WHERE m_id=$uid";
+                $result=$conn->query($sql);
+                $row=mysqli_fetch_assoc($result);
+
+                
+
+                echo "<table border='4'>
+                  <tr>
+                  <th>Account Number</th>
+                 <th>Member ID</th>
+                 <th>Balance</th>
+                 <th>interest Gainedj</th>
+                 <th>Starting Date/th>
+                 <th>last_transaction</th>
+                 </tr>
+                 <tr>
+                <td>$row[ac_no]</td>
+                <td>$row[m_id]</td>
+                <td>$row[abalance]</td>
+                <td>$row[interest]</td>
+                <td>$row[date_start]</td>
+                <td>$row[c_date]</td>
+                </tr>";
+
+                echo "</table>";
+
+
+
             }
           }
         
@@ -129,7 +175,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         
-            function_alert("user not registered");
+            function_alert("User is not a member");
         
         
         }

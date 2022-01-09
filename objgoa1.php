@@ -128,7 +128,7 @@ li{
     </style>
 </head>
 <body>
-    <head>
+    <header>
         <div style="background-color: #fcc133;text-align: center;padding-bottom: 10px;">
             <img src="https://www.pinclipart.com/picdir/middle/550-5502228_handshake-vector-shake-hands-vector-png-clipart.png"  width=165px alt="no image" align="left">
             <h1 style="color: brown;">PRIMARY AGRICULTURAL COOPERATIVE SOCIETY LTD</h1>
