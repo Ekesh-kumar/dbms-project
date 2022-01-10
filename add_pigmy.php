@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Register A Member</title>
+    <title>Add FD Account</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,15 +19,13 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="objgoa.php" >Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="admin.php" >Home <span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item active">
-        <a class="nav-link" href="admin.php" >Back <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="all_pigmy.php" >View All Pigmy Accounts <span class="sr-only">(current)</span></a>
 </li>
     
-      <li class="nav-item">
-        <a class="nav-link" href="update_pigmy.php">Update pigmy Accounts</a>
-      </li>
+   
 
       
      
@@ -38,7 +36,7 @@
   
 
     <div class="container my-4">
-     <h1 class="text-center">Register a member</h1>
+     <h1 class="text-center">Add Pigmy Account:</h1>
      <form action=""  method="post">
         <div class="form-group">
         <div class="form-group">
@@ -61,7 +59,7 @@
 
 
 
-       
+       <br>
          
         <button type="submit" class="btn btn-primary">Register</button>
      </form>

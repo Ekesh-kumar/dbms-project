@@ -34,15 +34,13 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="objgoa1.php" >Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="admin.php" >Home <span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item active">
-        <a class="nav-link" href="admin.php" >Back <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="all_savings.php" >View All Savings Account <span class="sr-only">(current)</span></a>
 </li>
     
-      <li class="nav-item">
-        <a class="nav-link" href="objgoa1.php">Logout</a>
-      </li>
+    
 
       
      
@@ -53,7 +51,7 @@
   
 
     <div class="container my-4">
-     <h1 class="text-center">Register a member</h1>
+     <h1 class="text-center">Add saving Account</h1>
      <form action=""  method="post">
         <div class="form-group">
         <div class="form-group">

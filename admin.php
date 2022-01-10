@@ -23,6 +23,8 @@ session_start();
             background-image:url("https://t4.ftcdn.net/jpg/02/86/02/67/360_F_286026740_xWkobcEk5g38qrH7cpfeImAnlUUSIrc5.jpg");
             background-size: cover;
             background-position:fixed;
+            background-attachment: fixed;
+
         }
         a{
             color:rgb(34, 218, 34);
@@ -68,9 +70,9 @@ session_start();
         <li><a href="all_loan.php">View all Loan account</a></li>
         <li><a href="all_pigmy.php">Veiw all pigmy Account</a></li> 
         <li><a href="delete_member.php">Delete a member Account</a></li>
-        <li><a href="delete_saving.php">Delete a pigmy Account</a></li>
-        <li><a href="delete_pigmy.php">Delete a FD Account</a></li>
-        <li><a href="delete_fd.php">Delete a Saving  Account</a></li>
+        <li><a href="delete_pigmy.php">Delete a pigmy Account</a></li>
+        <li><a href="delete_fd.php">Delete a FD Account</a></li>
+        <li><a href="delete_savings.php">Delete a Saving  Account</a></li>
         <li><a href="add_loan.php">Create Loan account</a></li>
         <li><a href="delete_loan.php">Delete Loan Account</a></li> 
      

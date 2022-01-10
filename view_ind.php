@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>PHP login system!</title>
+    <title>View Individual members</title>
     <style>
         table{
             border:11px;
@@ -29,7 +29,7 @@
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Search Individual members</a>
+  <a class="navbar-brand" href="#">Admin System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -51,7 +51,7 @@
 </nav>
 
 <div class="container mt-4">
-<h3>Search Here:</h3>
+<h3>Search A Member Here:</h3>
 <hr>
 
 <form action="" method="post">
@@ -130,8 +130,8 @@ if(empty($err))
                     {
                        
                             // this means the password is corrct. Allow user to login
-                           echo "<h2>Member Account details</h2>";
-                           echo "<br>";
+                           echo "<br><h2>Member Account details</h2>";
+                          
 
                            echo " <table border='4'>
                             <tr>
@@ -157,7 +157,7 @@ if(empty($err))
 
                       if($a_set==1){
 
-                        echo "<h1>Savings Account</h1>";
+                        echo "<br><h2>Savings Account</h2>";
                         
                             $sql="SELECT * FROM savings WHERE m_id=$id";
                             $result=$conn->query($sql);
@@ -188,7 +188,7 @@ if(empty($err))
 
                       if($p_set==1){
 
-                        echo "<h1>Pigmy Account</h1>";
+                        echo "<br><h2>Pigmy Account</h2>";
                         
                             $sql="SELECT * FROM pigmy WHERE m_id=$id";
                             $result=$conn->query($sql);
@@ -223,7 +223,7 @@ if(empty($err))
 
                       if($f_set==1){
 
-                        echo "<h1>Fixed Deposit Account</h1>";
+                        echo "<br><h2>Fixed Deposit Account</h2>";
                         
                             $sql="SELECT * FROM fd WHERE m_id=$id";
                             $result=$conn->query($sql);
@@ -262,7 +262,7 @@ if(empty($err))
                       
                       if($loan_set==1){
 
-                        echo "<h1>Loan Account</h1>";
+                        echo "<br><h2>Loan Account</h2>";
                         
                             $sql="SELECT * FROM loans WHERE m_id=$id";
                             $result=$conn->query($sql);
