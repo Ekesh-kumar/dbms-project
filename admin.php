@@ -60,7 +60,7 @@ session_start();
     <strong><ul  style="color:rgb(43, 204, 75); font-size:30px">
         <li><a href="view_all.php">See all the members</a></li>
         <li> <a href="view_ind.php">Search a member by is ID</a></li>
-        <li><a href="View_funds.php">View Funds</a></li> 
+        <li><a href="funds.php">View Funds</a></li> 
         <li><a href="register.php">Create a new Member Account</a></li>
         <li><a href="all_fac.php">View and update all stocks</a></li>
         <li><a href="add_savings.php">Create a new Savings Accout</a></li>

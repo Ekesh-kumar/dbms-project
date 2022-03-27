@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="admin.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="admin.php">Back</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="view_all.php">View all Pigmy Accounts</a>

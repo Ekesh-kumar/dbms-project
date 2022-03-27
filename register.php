@@ -81,16 +81,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="objgoa.php" >Home <span class="sr-only">(current)</span></a>
-</li>
+   
 <li class="nav-item active">
         <a class="nav-link" href="admin.php" >Back <span class="sr-only">(current)</span></a>
 </li>
     
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-      </li>
+  
 
       
      
